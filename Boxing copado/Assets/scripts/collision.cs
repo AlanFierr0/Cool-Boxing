@@ -9,13 +9,13 @@ public class Collision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        TryLogHit(other, "Trigger Enter");
+        TryLogHit(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
         // XR tracked objects sometimes start already overlapping; stay ensures we still detect them.
-        TryLogHit(other, "Trigger Stay");
+        TryLogHit(other);
     }
 
     private void OnTriggerExit(Collider other)
@@ -23,7 +23,7 @@ public class Collision : MonoBehaviour
         _activeHits.Remove(other);
     }
 
-    private void TryLogHit(Collider other, string hitType)
+    private void TryLogHit(Collider other)
     {
         GameObject hitObject = other.gameObject;
 
@@ -37,12 +37,12 @@ public class Collision : MonoBehaviour
             return;
         }
 
-        LogHit(hitObject, hitType);
+        LogHit(hitObject);
     }
 
-    private void LogHit(GameObject hitObject, string hitType)
+    private void LogHit(GameObject hitObject)
     {
-        Debug.Log($"{hitType} detected with: {hitObject.name}");
-        Debug.Log($"Collided with {playerTag} via {hitType}!");
+        string sourceObjectName = gameObject.name;
+        Debug.Log($"{sourceObjectName} collided with {hitObject.name}!");
     }
 }

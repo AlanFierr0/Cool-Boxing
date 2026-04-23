@@ -3,7 +3,12 @@ guid: 9ab244d7842b2be429184a0b20069090
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glove 1
+    second: {fileID: 2100000, guid: 53c16fb5d5c516b40a1f6a8fc34132f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
