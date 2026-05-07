@@ -1,0 +1,248 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                 MOTION MATCHING SCORING SYSTEM - CHEATSHEET                    ║
+║                              (Imprimir & Llevar)                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+ 1. CREAR EL SISTEMA EN UNITY (5 MINUTOS)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Crea un GameObject: MotionMatchingManager
+2. Agrega 4 componentes (Add Component):
+   ✅ RobotMotionSampler
+   ✅ VRPlayerTracker
+   ✅ MotionComparer
+   ✅ MotionScoreSystem
+
+3. Arrastra en Inspector:
+   
+   RobotMotionSampler:
+   ├─ Robot Root: [Tu Robot_Kyle]
+   ├─ Robot Animator: [El Animator del robot]
+   └─ Sample Interval: 0.02
+   
+   VRPlayerTracker:
+   ├─ Player Root: [XR Origin]
+   ├─ Head Transform: [Main Camera]
+   ├─ Left Hand Transform: [LeftHand Controller]
+   └─ Right Hand Transform: [RightHand Controller]
+   
+   MotionComparer:
+   ├─ Robot Sampler: [RobotMotionSampler]
+   ├─ Player Tracker: [VRPlayerTracker]
+   ├─ Weights: 0.4 / 0.4 / 0.2 (left/right/head)
+   └─ Draw Debug Gizmos: ON
+   
+   MotionScoreSystem:
+   ├─ Robot Sampler: [RobotMotionSampler]
+   ├─ Player Tracker: [VRPlayerTracker]
+   ├─ Motion Comparer: [MotionComparer]
+   └─ Max Allowed Error: 0.5
+
+═══════════════════════════════════════════════════════════════════════════════
+ 2. CÓDIGO BASE (COPIAR Y PEGAR)
+═══════════════════════════════════════════════════════════════════════════════
+
+[Copia esta función a tu GameManager]
+
+    public void ExecutePunchTutorial(Animator robotAnimator, 
+                                     MotionScoreSystem scoreSystem)
+    {
+        StartCoroutine(PunchRoutine(robotAnimator, scoreSystem));
+    }
+
+    private IEnumerator PunchRoutine(Animator robot, MotionScoreSystem score)
+    {
+        // 1. OPCIÓN 1: Robot demuestra
+        Debug.Log("Robot va a demostrar...");
+        score.StartRobotSampling();
+        robot.SetTrigger("PunchLeft");
+        yield return new WaitForSeconds(2.5f);
+        score.StopRobotSampling();
+
+        // 2. Espera y da instrucciones
+        yield return new WaitForSeconds(1f);
+        Debug.Log("¡Ahora imita el movimiento!");
+
+        // 3. Jugador imita
+        score.StartComparison();
+        yield return new WaitForSeconds(4f);
+        score.StopComparison();
+
+        // 4. Resultado
+        float finalScore = score.FinalScore;
+        float avgError = score.AverageError;
+        
+        Debug.Log($"SCORE: {finalScore:F1}/100 (Error: {avgError:F4}m)");
+    }
+
+═══════════════════════════════════════════════════════════════════════════════
+ 3. CÓMO FUNCIONA - LA IDEA CLAVE
+═══════════════════════════════════════════════════════════════════════════════
+
+🤖 ROBOT DEMUESTRA (2.5 segundos):
+   - Sistema samplea: Head, LeftHand, RightHand cada 0.02s
+   - Guarda ~125 "fotogramas" locales
+   - Estructura: List<MotionFrame> con posición + rotación
+
+👤 JUGADOR IMITA (hasta 4 segundos):
+   - Sistema compara en tiempo real
+   - NO compara frame exacto
+   - COMPARA por PROGRESO NORMALIZADO (0 a 1)
+   
+   Ejemplo:
+     Robot duracion: 2s
+     Jugador tiempo: 1s
+     Progreso: 1/2 = 0.5 (50%)
+     Se compara contra pose del robot EN 50% de la secuencia
+   
+   Resultado:
+     ✅ Jugador más lento: OK si trayectoria es correcta
+     ✅ Jugador más rápido: OK si trayectoria es correcta
+     ❌ Trayectoria diferente: Score bajo
+
+📊 SCORE FINAL:
+   Error promedio ponderado:
+     40% mano izquierda
+     40% mano derecha
+     20% cabeza
+   
+   Formula: Score = (1 - avgError / maxAllowedError) * 100
+   
+   Ajuste fácil: Max Allowed Error
+     0.2 = MUY difícil
+     0.5 = Equilibrado ⭐
+     1.0 = Muy fácil
+
+═══════════════════════════════════════════════════════════════════════════════
+ 4. VERIFICACIÓN RÁPIDA
+═══════════════════════════════════════════════════════════════════════════════
+
+☑️ ¿Animator del robot es HUMANOID?
+   Select Robot → Assets → Rig Tab → Avatar: Humanoid ✅
+
+☑️ ¿Todos los transforms asignados?
+   Sin errores rojos en Console ✅
+
+☑️ ¿Play Mode + Simulate Quick Test funciona?
+   Console debe mostrar "RESULTADO FINAL: Score: XX.X/100" ✅
+
+═══════════════════════════════════════════════════════════════════════════════
+ 5. DEBUGGING
+═══════════════════════════════════════════════════════════════════════════════
+
+🔍 Ver qué está pasando:
+   1. Activar "Draw Debug Gizmos" en MotionComparer
+   2. Play Mode
+   3. Scene View (no Game View)
+   4. Deberías ver LÍNEAS AMARILLAS conectando:
+      - Mano del robot con Mano del jugador
+   5. Líneas CORTAS = buen score ✅
+      Líneas LARGAS = malo ❌
+
+📋 Logs importantes:
+   "[Sampleo] Iniciado"
+   "[Comparación] Iniciada"
+   "RESULTADO FINAL"
+   "Score: XX.X / 100"
+
+═══════════════════════════════════════════════════════════════════════════════
+ 6. PARÁMETROS AJUSTABLES
+═══════════════════════════════════════════════════════════════════════════════
+
+MotionScoreSystem:
+  Max Allowed Error:
+    0.2 = Muy fácil obtener 0
+    0.5 = Equilibrado ⭐
+    1.0 = Muy permisivo
+
+MotionComparer (Pesos):
+  Left Hand:  0.4 (importante)
+  Right Hand: 0.4 (importante)
+  Head:       0.2 (menos crítica)
+
+RobotMotionSampler:
+  Sample Interval: 0.02 (50 Hz)
+    Más bajo = más preciso pero más data
+    Más alto = menos preciso pero menos data
+
+═══════════════════════════════════════════════════════════════════════════════
+ 7. TROUBLESHOOTING RÁPIDO
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ "Score siempre 0"
+   └─ maxAllowedError muy bajo
+   └─ Aumenta a 0.7 o 1.0
+
+❌ "no se encontraron algunos bones"
+   └─ Animator no es Humanoid
+   └─ Convierte a Humanoid
+
+❌ Lineas amarillas no aparecen
+   └─ Activar "Draw Debug Gizmos"
+   └─ Ver Scene View (no Game View)
+
+❌ "playerRoot no asignado"
+   └─ Verifica que XR Origin esté asignado
+
+═══════════════════════════════════════════════════════════════════════════════
+ 8. SCRIPTS CREADOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ MotionFrame.cs          - Modelo de datos (time + poses)
+✅ RobotMotionSampler.cs   - Samplea animación del robot
+✅ VRPlayerTracker.cs      - Trackea pose del jugador
+✅ MotionComparer.cs       - Compara poses (algoritmo)
+✅ MotionScoreSystem.cs    - Orquesta todo (eventos + scoring)
+✅ MotionMatchingExample.cs - Código de ejemplo
+
+Ubicación: Assets/scripts/
+
+═══════════════════════════════════════════════════════════════════════════════
+ 9. FLUJO MÍNIMO FUNCIONAL
+═══════════════════════════════════════════════════════════════════════════════
+
+// En tu script principal:
+
+[SerializeField] MotionScoreSystem scoreSystem;
+[SerializeField] Animator robotAnimator;
+
+public void PlayLevel1()
+{
+    // Robot demuestra
+    scoreSystem.StartRobotSampling();
+    robotAnimator.SetTrigger("PunchLeft");
+    
+    // Después de 2.5s:
+    scoreSystem.StopRobotSampling();
+    
+    // Jugador imita (4s máximo)
+    scoreSystem.StartComparison();
+    
+    // Después de 4s:
+    scoreSystem.StopComparison();
+    
+    // Ver score
+    Debug.Log(scoreSystem.FinalScore + "/100");
+}
+
+═══════════════════════════════════════════════════════════════════════════════
+ 10. DOCUMENTOS DE REFERENCIA
+═══════════════════════════════════════════════════════════════════════════════
+
+📖 MOTION_MATCHING_SETUP.md
+   ↳ Setup paso a paso con imágenes mentales
+
+📖 MOTION_MATCHING_QUICK_START.md
+   ↳ Resumen de 5 minutos
+
+📖 UI_OPTIONAL_SETUP.md
+   ↳ Setup visual en Inspector (copiar exacto)
+
+📖 IMPLEMENTATION_COMPLETE.md
+   ↳ Documentación técnica completa (arquitectura + algoritmos)
+
+═══════════════════════════════════════════════════════════════════════════════
+                              ¡LISTO PARA USAR! 🚀
+═══════════════════════════════════════════════════════════════════════════════
+
