@@ -1,0 +1,165 @@
+# 🎮 GHOST PUNCH - SIDEQUEST CHEATSHEET
+
+## 1️⃣ UNITY SETUP (15 min)
+
+### Create GameObject
+```
+Hierarchy → Create Empty → Rename "GhostPunchSystem"
+Add Components:
+  ✓ VRGhostRecorder
+  ✓ VRRecorderInput
+  ✓ VRGhostPlayback
+  ✓ GhostPunchScorer
+```
+
+### VRGhostRecorder Config
+```
+Player Root        → XR Origin
+Head Transform     → Main Camera
+Left Hand          → LeftHand Controller
+Right Hand         → RightHand Controller
+Sample Interval    → 0.02
+```
+
+### Input Actions
+```
+Create → InputActions → "BoxingControls"
+  Action: "ToggleRecordPunch" (Type: Button)
+  Binding: Left Hand / Thumbstick / Click
+  
+In VRRecorderInput:
+  Recorder             → VRGhostRecorder
+  Toggle Recording     → BoxingControls/ToggleRecordPunch
+```
+
+### Ghost Objects
+```
+Create 3 Empty Objects with Mesh:
+  GhostHead
+  GhostLeftHand
+  GhostRightHand
+  
+Each → Add Material (transparent)
+```
+
+### VRGhostPlayback Config
+```
+Player Root           → XR Origin
+Recorder             → VRGhostRecorder
+Ghost Head           → GhostHead
+Ghost Left Hand      → GhostLeftHand
+Ghost Right Hand     → GhostRightHand
+Auto Play on Stop    → ON
+```
+
+### GhostPunchScorer Config
+```
+Playback             → VRGhostPlayback
+Real Left Hand       → LeftHand Controller
+Real Right Hand      → RightHand Controller
+Ghost Left Hand      → GhostLeftHand
+Ghost Right Hand     → GhostRightHand
+Include Left/Right   → ON
+```
+
+---
+
+## 2️⃣ BUILD APK (5 min)
+
+```
+File → Build Settings
+├─ Platform: Android
+├─ Scenes: [✓ Your Scene]
+└─ Build APK
+
+⏳ Wait 2-5 min → app.apk ready
+```
+
+---
+
+## 3️⃣ QUEST PREPARATION
+
+### on Headset:
+```
+Settings → About
+  └─ Tap "Build Number" 7x
+     ✅ "You are now a developer"
+
+Settings → Developer
+  └─ USB Debugging → ON
+
+Connect USB to PC
+```
+
+---
+
+## 4️⃣ SIDEQUEST INSTALL (3 min)
+
+```
+1. Download: https://sidequestvr.com/setup
+2. Install & Open SideQuest
+3. Connect Quest (USB)
+4. Folder Icon → Select app.apk
+5. Click "Install"
+   ✅ Done
+```
+
+---
+
+## 5️⃣ PLAY GAME
+
+```
+In SideQuest:
+  Installed Apps → Your App → Launch
+
+In Game:
+  Press Joystick Button → Recording starts
+  Move your hands/head
+  Press Joystick Button → Recording stops
+                    ✅ Ghost plays automatically
+                    ✅ Score calculated
+
+See Score:
+  SideQuest Console (bottom right)
+    Or in UI if you set it up
+```
+
+---
+
+## 📊 SCORE REFERENCE
+
+```
+100 = Perfect tracking
+75  = Good follow
+50  = Decent attempt
+25  = Rough follow
+0   = No match
+```
+
+---
+
+## 🐛 QUICK FIX
+
+| Issue | Fix |
+|-------|-----|
+| Quest not detected | Reconnect USB; Restart SideQuest |
+| Installing fails | Uninstall old version in SideQuest |
+| Button doesn't work | Check InputActionReference assigned |
+| No ghost visible | Check ghost objects have Mesh |
+| Score is 0 | Check hands are assigned |
+| Can't see logs | Open SideQuest Console |
+
+---
+
+## 📚 DOCS
+
+```
+README_SIDEQUEST.md       ← Complete guide
+SIDEQUEST_QUICK_START.md  ← 10-min version
+UI_OPTIONAL_SETUP.md      ← Add UI to headset
+```
+
+---
+
+**Print this & keep by your workspace!** 🚀
+
