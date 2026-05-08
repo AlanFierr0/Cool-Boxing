@@ -1,49 +1,49 @@
-╔═══════════════════════════════════════════════════════════════════════════════╗
-║                 MOTION MATCHING SCORING SYSTEM - CHEATSHEET                    ║
-║                              (Imprimir & Llevar)                               ║
-╚═══════════════════════════════════════════════════════════════════════════════╝
+﻿â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+â•‘                 MOTION MATCHING SCORING SYSTEM - CHEATSHEET                    â•‘
+â•‘                              (Imprimir & Llevar)                               â•‘
+â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  1. CREAR EL SISTEMA EN UNITY (5 MINUTOS)
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 1. Crea un GameObject: MotionMatchingManager
 2. Agrega 4 componentes (Add Component):
-   ✅ RobotMotionSampler
-   ✅ VRPlayerTracker
-   ✅ MotionComparer
-   ✅ MotionScoreSystem
+   âœ… RobotMotionSampler
+   âœ… VRPlayerTracker
+   âœ… MotionComparer
+   âœ… MotionScoreSystem
 
 3. Arrastra en Inspector:
    
    RobotMotionSampler:
-   ├─ Robot Root: [Tu Robot_Kyle]
-   ├─ Robot Animator: [El Animator del robot]
-   └─ Sample Interval: 0.02
+   â”œâ”€ Robot Root: [Tu Robot_Kyle]
+   â”œâ”€ Robot Animator: [El Animator del robot]
+   â””â”€ Sample Interval: 0.02
    
    VRPlayerTracker:
-   ├─ Player Root: [XR Origin]
-   ├─ Head Transform: [Main Camera]
-   ├─ Left Hand Transform: [LeftHand Controller]
-   └─ Right Hand Transform: [RightHand Controller]
+   â”œâ”€ Player Root: [XR Origin]
+   â”œâ”€ Head Transform: [Main Camera]
+   â”œâ”€ Left Hand Transform: [LeftHand Controller]
+   â””â”€ Right Hand Transform: [RightHand Controller]
    
    MotionComparer:
-   ├─ Robot Sampler: [RobotMotionSampler]
-   ├─ Player Tracker: [VRPlayerTracker]
-   ├─ Weights: 0.4 / 0.4 / 0.2 (left/right/head)
-   └─ Draw Debug Gizmos: ON
+   â”œâ”€ Robot Sampler: [RobotMotionSampler]
+   â”œâ”€ Player Tracker: [VRPlayerTracker]
+   â”œâ”€ Weights: 0.4 / 0.4 / 0.2 (left/right/head)
+   â””â”€ Draw Debug Gizmos: ON
    
    MotionScoreSystem:
-   ├─ Robot Sampler: [RobotMotionSampler]
-   ├─ Player Tracker: [VRPlayerTracker]
-   ├─ Motion Comparer: [MotionComparer]
-   └─ Max Allowed Error: 0.5
+   â”œâ”€ Robot Sampler: [RobotMotionSampler]
+   â”œâ”€ Player Tracker: [VRPlayerTracker]
+   â”œâ”€ Motion Comparer: [MotionComparer]
+   â””â”€ Max Allowed Error: 0.5
 
-═══════════════════════════════════════════════════════════════════════════════
- 2. CÓDIGO BASE (COPIAR Y PEGAR)
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 2. CÃ“DIGO BASE (COPIAR Y PEGAR)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-[Copia esta función a tu GameManager]
+[Copia esta funciÃ³n a tu GameManager]
 
     public void ExecutePunchTutorial(Animator robotAnimator, 
                                      MotionScoreSystem scoreSystem)
@@ -53,7 +53,7 @@
 
     private IEnumerator PunchRoutine(Animator robot, MotionScoreSystem score)
     {
-        // 1. OPCIÓN 1: Robot demuestra
+        // 1. OPCIÃ“N 1: Robot demuestra
         Debug.Log("Robot va a demostrar...");
         score.StartRobotSampling();
         robot.SetTrigger("PunchLeft");
@@ -62,7 +62,7 @@
 
         // 2. Espera y da instrucciones
         yield return new WaitForSeconds(1f);
-        Debug.Log("¡Ahora imita el movimiento!");
+        Debug.Log("Â¡Ahora imita el movimiento!");
 
         // 3. Jugador imita
         score.StartComparison();
@@ -76,16 +76,16 @@
         Debug.Log($"SCORE: {finalScore:F1}/100 (Error: {avgError:F4}m)");
     }
 
-═══════════════════════════════════════════════════════════════════════════════
- 3. CÓMO FUNCIONA - LA IDEA CLAVE
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 3. CÃ“MO FUNCIONA - LA IDEA CLAVE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-🤖 ROBOT DEMUESTRA (2.5 segundos):
+ðŸ¤– ROBOT DEMUESTRA (2.5 segundos):
    - Sistema samplea: Head, LeftHand, RightHand cada 0.02s
    - Guarda ~125 "fotogramas" locales
-   - Estructura: List<MotionFrame> con posición + rotación
+   - Estructura: List<MotionFrame> con posiciÃ³n + rotaciÃ³n
 
-👤 JUGADOR IMITA (hasta 4 segundos):
+ðŸ‘¤ JUGADOR IMITA (hasta 4 segundos):
    - Sistema compara en tiempo real
    - NO compara frame exacto
    - COMPARA por PROGRESO NORMALIZADO (0 a 1)
@@ -97,11 +97,11 @@
      Se compara contra pose del robot EN 50% de la secuencia
    
    Resultado:
-     ✅ Jugador más lento: OK si trayectoria es correcta
-     ✅ Jugador más rápido: OK si trayectoria es correcta
-     ❌ Trayectoria diferente: Score bajo
+     âœ… Jugador mÃ¡s lento: OK si trayectoria es correcta
+     âœ… Jugador mÃ¡s rÃ¡pido: OK si trayectoria es correcta
+     âŒ Trayectoria diferente: Score bajo
 
-📊 SCORE FINAL:
+ðŸ“Š SCORE FINAL:
    Error promedio ponderado:
      40% mano izquierda
      40% mano derecha
@@ -109,98 +109,98 @@
    
    Formula: Score = (1 - avgError / maxAllowedError) * 100
    
-   Ajuste fácil: Max Allowed Error
-     0.2 = MUY difícil
-     0.5 = Equilibrado ⭐
-     1.0 = Muy fácil
+   Ajuste fÃ¡cil: Max Allowed Error
+     0.2 = MUY difÃ­cil
+     0.5 = Equilibrado â­
+     1.0 = Muy fÃ¡cil
 
-═══════════════════════════════════════════════════════════════════════════════
- 4. VERIFICACIÓN RÁPIDA
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 4. VERIFICACIÃ“N RÃPIDA
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-☑️ ¿Animator del robot es HUMANOID?
-   Select Robot → Assets → Rig Tab → Avatar: Humanoid ✅
+â˜‘ï¸ Â¿Animator del robot es HUMANOID?
+   Select Robot â†’ Assets â†’ Rig Tab â†’ Avatar: Humanoid âœ…
 
-☑️ ¿Todos los transforms asignados?
-   Sin errores rojos en Console ✅
+â˜‘ï¸ Â¿Todos los transforms asignados?
+   Sin errores rojos en Console âœ…
 
-☑️ ¿Play Mode + Simulate Quick Test funciona?
-   Console debe mostrar "RESULTADO FINAL: Score: XX.X/100" ✅
+â˜‘ï¸ Â¿Play Mode + Simulate Quick Test funciona?
+   Console debe mostrar "RESULTADO FINAL: Score: XX.X/100" âœ…
 
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  5. DEBUGGING
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-🔍 Ver qué está pasando:
+ðŸ” Ver quÃ© estÃ¡ pasando:
    1. Activar "Draw Debug Gizmos" en MotionComparer
    2. Play Mode
    3. Scene View (no Game View)
-   4. Deberías ver LÍNEAS AMARILLAS conectando:
+   4. DeberÃ­as ver LÃNEAS AMARILLAS conectando:
       - Mano del robot con Mano del jugador
-   5. Líneas CORTAS = buen score ✅
-      Líneas LARGAS = malo ❌
+   5. LÃ­neas CORTAS = buen score âœ…
+      LÃ­neas LARGAS = malo âŒ
 
-📋 Logs importantes:
+ðŸ“‹ Logs importantes:
    "[Sampleo] Iniciado"
-   "[Comparación] Iniciada"
+   "[ComparaciÃ³n] Iniciada"
    "RESULTADO FINAL"
    "Score: XX.X / 100"
 
-═══════════════════════════════════════════════════════════════════════════════
- 6. PARÁMETROS AJUSTABLES
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 6. PARÃMETROS AJUSTABLES
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 MotionScoreSystem:
   Max Allowed Error:
-    0.2 = Muy fácil obtener 0
-    0.5 = Equilibrado ⭐
+    0.2 = Muy fÃ¡cil obtener 0
+    0.5 = Equilibrado â­
     1.0 = Muy permisivo
 
 MotionComparer (Pesos):
   Left Hand:  0.4 (importante)
   Right Hand: 0.4 (importante)
-  Head:       0.2 (menos crítica)
+  Head:       0.2 (menos crÃ­tica)
 
 RobotMotionSampler:
   Sample Interval: 0.02 (50 Hz)
-    Más bajo = más preciso pero más data
-    Más alto = menos preciso pero menos data
+    MÃ¡s bajo = mÃ¡s preciso pero mÃ¡s data
+    MÃ¡s alto = menos preciso pero menos data
 
-═══════════════════════════════════════════════════════════════════════════════
- 7. TROUBLESHOOTING RÁPIDO
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 7. TROUBLESHOOTING RÃPIDO
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-❌ "Score siempre 0"
-   └─ maxAllowedError muy bajo
-   └─ Aumenta a 0.7 o 1.0
+âŒ "Score siempre 0"
+   â””â”€ maxAllowedError muy bajo
+   â””â”€ Aumenta a 0.7 o 1.0
 
-❌ "no se encontraron algunos bones"
-   └─ Animator no es Humanoid
-   └─ Convierte a Humanoid
+âŒ "no se encontraron algunos bones"
+   â””â”€ Animator no es Humanoid
+   â””â”€ Convierte a Humanoid
 
-❌ Lineas amarillas no aparecen
-   └─ Activar "Draw Debug Gizmos"
-   └─ Ver Scene View (no Game View)
+âŒ Lineas amarillas no aparecen
+   â””â”€ Activar "Draw Debug Gizmos"
+   â””â”€ Ver Scene View (no Game View)
 
-❌ "playerRoot no asignado"
-   └─ Verifica que XR Origin esté asignado
+âŒ "playerRoot no asignado"
+   â””â”€ Verifica que XR Origin estÃ© asignado
 
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  8. SCRIPTS CREADOS
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-✅ MotionFrame.cs          - Modelo de datos (time + poses)
-✅ RobotMotionSampler.cs   - Samplea animación del robot
-✅ VRPlayerTracker.cs      - Trackea pose del jugador
-✅ MotionComparer.cs       - Compara poses (algoritmo)
-✅ MotionScoreSystem.cs    - Orquesta todo (eventos + scoring)
-✅ MotionMatchingExample.cs - Código de ejemplo
+âœ… MotionFrame.cs          - Modelo de datos (time + poses)
+âœ… RobotMotionSampler.cs   - Samplea animaciÃ³n del robot
+âœ… VRPlayerTracker.cs      - Trackea pose del jugador
+âœ… MotionComparer.cs       - Compara poses (algoritmo)
+âœ… MotionScoreSystem.cs    - Orquesta todo (eventos + scoring)
+âœ… MotionMatchingExample.cs - CÃ³digo de ejemplo
 
-Ubicación: Assets/scripts/
+UbicaciÃ³n: Assets/scripts/
 
-═══════════════════════════════════════════════════════════════════════════════
- 9. FLUJO MÍNIMO FUNCIONAL
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ 9. FLUJO MÃNIMO FUNCIONAL
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 // En tu script principal:
 
@@ -213,36 +213,38 @@ public void PlayLevel1()
     scoreSystem.StartRobotSampling();
     robotAnimator.SetTrigger("PunchLeft");
     
-    // Después de 2.5s:
+    // DespuÃ©s de 2.5s:
     scoreSystem.StopRobotSampling();
     
-    // Jugador imita (4s máximo)
+    // Jugador imita (4s mÃ¡ximo)
     scoreSystem.StartComparison();
     
-    // Después de 4s:
+    // DespuÃ©s de 4s:
     scoreSystem.StopComparison();
     
     // Ver score
     Debug.Log(scoreSystem.FinalScore + "/100");
 }
 
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  10. DOCUMENTOS DE REFERENCIA
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-📖 MOTION_MATCHING_SETUP.md
-   ↳ Setup paso a paso con imágenes mentales
+ðŸ“– MOTION_MATCHING_SETUP.md
+   â†³ Setup paso a paso con imÃ¡genes mentales
 
-📖 MOTION_MATCHING_QUICK_START.md
-   ↳ Resumen de 5 minutos
+ðŸ“– MOTION_MATCHING_QUICK_START.md
+   â†³ Resumen de 5 minutos
 
-📖 UI_OPTIONAL_SETUP.md
-   ↳ Setup visual en Inspector (copiar exacto)
+ðŸ“– UI_OPTIONAL_SETUP.md
+   â†³ Setup visual en Inspector (copiar exacto)
 
-📖 IMPLEMENTATION_COMPLETE.md
-   ↳ Documentación técnica completa (arquitectura + algoritmos)
+ðŸ“– IMPLEMENTATION_COMPLETE.md
+   â†³ DocumentaciÃ³n tÃ©cnica completa (arquitectura + algoritmos)
 
-═══════════════════════════════════════════════════════════════════════════════
-                              ¡LISTO PARA USAR! 🚀
-═══════════════════════════════════════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+                              Â¡LISTO PARA USAR! ðŸš€
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+
 
