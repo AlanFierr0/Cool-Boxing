@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Collision : MonoBehaviour
 {
-    [SerializeField] private string playerTag = "Player";
+    [SerializeField] private string playerTag = "Hand";
 
     private readonly HashSet<Collider> _activeHits = new HashSet<Collider>();
 
@@ -37,12 +37,27 @@ public class Collision : MonoBehaviour
             return;
         }
 
-        LogHit(hitObject);
-    }
+        // compute a reasonable contact point on the collider
+        Vector3 contactPoint = other.ClosestPoint(transform.position);
 
-    private void LogHit(GameObject hitObject)
-    {
-        string sourceObjectName = gameObject.name;
-        Debug.Log($"{sourceObjectName} collided with {hitObject.name}!");
+        // estimate intensity from the hitter's Rigidbody velocity if available
+        float intensity = 1f;
+        var hitterRb = other.attachedRigidbody;
+        if (hitterRb != null)
+        {
+            // scale velocity magnitude to a 0..1 intensity. Tweak divisor to your feel (2f = strong at 2 m/s)
+            intensity = Mathf.Clamp01(hitterRb.linearVelocity.magnitude / 2f);
+        }
+
+        // attempt to forward the hit to a RobotHitReceiver located on this hitbox or a parent
+        var receiver = GetComponentInParent<RobotHitReceiver>();
+        if (receiver != null)
+        {
+            receiver.OnHit(hitObject, contactPoint, transform, intensity);
+            return;
+        }
+
+        // fallback: just log if no receiver is present
+        Debug.Log($"{gameObject.name} collided with {hitObject.name}!");
     }
 }
