@@ -63556,6 +63556,14 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.0056603844
       objectReference: {fileID: 0}
+    - target: {fileID: 2721347645174794625, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: playerTag
+      value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3225352311819891495, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: playerTag
+      value: Hand
+      objectReference: {fileID: 0}
     - target: {fileID: 3318478509725144244, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
