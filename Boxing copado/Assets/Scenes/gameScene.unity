@@ -40801,6 +40801,10 @@ MonoBehaviour:
     areaIndex: 1
   - hitboxName: Chin
     areaIndex: 2
+  - hitboxName: LeftArm
+    areaIndex: 3
+  - hitboxName: RightArm
+    areaIndex: 4
 --- !u!1001 &915138038
 PrefabInstance:
   m_ObjectHideFlags: 0
