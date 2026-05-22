@@ -42,7 +42,7 @@ AnimatorStateTransition:
     m_EventTreshold: 2
   - m_ConditionMode: 3
     m_ConditionEvent: HitVelocity
-    m_EventTreshold: 15
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7834550345228756455}
   m_Solo: 0
@@ -288,7 +288,7 @@ AnimatorStateTransition:
     m_EventTreshold: 1
   - m_ConditionMode: 3
     m_ConditionEvent: HitVelocity
-    m_EventTreshold: 15
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1801596435417673219}
   m_Solo: 0
@@ -341,7 +341,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: isTaunting
     m_Type: 4
@@ -389,7 +389,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: HitArea
     m_Type: 3
@@ -549,7 +549,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: HitVelocity
-    m_EventTreshold: 15
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6487676623864358013}
   m_Solo: 0
@@ -657,7 +657,7 @@ AnimatorStateTransition:
     m_EventTreshold: 3
   - m_ConditionMode: 3
     m_ConditionEvent: HitVelocity
-    m_EventTreshold: 15
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8220255892623826607}
   m_Solo: 0
@@ -790,7 +790,7 @@ AnimatorStateTransition:
     m_EventTreshold: 4
   - m_ConditionMode: 3
     m_ConditionEvent: HitVelocity
-    m_EventTreshold: 15
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3077630182076078524}
   m_Solo: 0
