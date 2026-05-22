@@ -20299,6 +20299,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1407583648}
+    - targetCorrespondingSourceObject: {fileID: 202364687, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 457735728}
     - targetCorrespondingSourceObject: {fileID: 7060645920214020562, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1117731449}
@@ -20306,6 +20309,29 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 184840824}
   m_SourcePrefab: {fileID: 100100000, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+--- !u!1 &457735727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 202364687, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 457735726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &457735728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457735727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b917958e16064225beffd84cfa335d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandImpactSensor
+  targetTag: 
+  hitCooldownSeconds: 0.25
+  minSpeedForHit: 1
+  smoothingSamples: 3
+  recordHistory: 1
+  maxRecordedImpacts: 64
 --- !u!1001 &458771052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32868,6 +32894,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6448171805470960658, guid: 6a9598db077c94d458cb31ba09a02fbd, type: 3}
   m_PrefabInstance: {fileID: 742400309}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &745005124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745005126}
+  - component: {fileID: 745005125}
+  m_Layer: 0
+  m_Name: VelocityMeter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &745005125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745005124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a2806d971343ddbd38c6944aaf1e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactMeter
+  defaultSampleDuration: 0.12
+  defaultSampleInterval: 0.02
+--- !u!4 &745005126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745005124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.09476, y: -0.06249, z: 3.046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &745224661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40805,6 +40877,9 @@ MonoBehaviour:
     areaIndex: 3
   - hitboxName: RightArm
     areaIndex: 4
+  impactMeter: {fileID: 745005125}
+  impactSampleDuration: 0.12
+  impactSampleInterval: 0.02
 --- !u!1001 &915138038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63520,6 +63595,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1903019196390938633, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903019196390938633, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2002569394063123500, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -63575,6 +63658,10 @@ PrefabInstance:
     - target: {fileID: 3318478509725144244, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369080900709340650, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 3422294090707601256, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -97813,3 +97900,4 @@ SceneRoots:
   - {fileID: 1475219444}
   - {fileID: 1236921169}
   - {fileID: 457735726}
+  - {fileID: 745005126}

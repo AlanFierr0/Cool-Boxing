@@ -42,6 +42,14 @@ public class RobotHitReceiver : MonoBehaviour
 
     private Dictionary<string, int> _hitboxToAreaMap;
 
+    [Header("Impact Meter (optional)")]
+    [Tooltip("Referencia a un ImpactMeter que medirá la velocidad del guante después de que se detecte un hit. Si está asignado, el RobotHitReceiver pedirá una muestra y colocará el parámetro 'HitVelocity' en el Animator.")]
+    [SerializeField] private ImpactMeter impactMeter;
+    [Tooltip("Duración del muestreo (s) que se le pedirá al ImpactMeter si está presente.")]
+    [SerializeField] private float impactSampleDuration = 0.12f;
+    [Tooltip("Intervalo de muestreo (s) que se le pedirá al ImpactMeter si está presente.")]
+    [SerializeField] private float impactSampleInterval = 0.02f;
+
     private void OnEnable()
     {
         BuildHitboxMap();
@@ -91,6 +99,21 @@ public class RobotHitReceiver : MonoBehaviour
 
         Debug.Log($"Hit received from {hitter.name} on {hitboxTransform.name} (area: {GetAreaIndex(hitboxTransform.name)}, power: {intensity:F2})");
 
+        // Si hay un ImpactMeter asignado, pedimos que mida la velocidad del guante del 'hitter'
+        if (impactMeter != null && hitter != null)
+        {
+            Transform handTransform = hitter.transform;
+            impactMeter.StartSampling(handTransform, impactSampleDuration, impactSampleInterval, (measuredSpeed) =>
+            {
+                // Guardar velocidad directamente en el Animator como parámetro HitVelocity (float)
+                if (animator != null)
+                {
+                    animator.SetFloat("HitVelocity", measuredSpeed);
+                    Debug.Log($"RobotHitReceiver: ImpactMeter measured speed={measuredSpeed:F2} m/s and set Animator HitVelocity.");
+                }
+            });
+        }
+
         // Schedule isIdle to turn back ON after the hit reaction duration
         StopCoroutine(ResumeIdleAfterDelay());
         StartCoroutine(ResumeIdleAfterDelay());
@@ -135,8 +158,4 @@ public class RobotHitReceiver : MonoBehaviour
         return -1;
     }
 }
-
-
-
-
 
