@@ -41,7 +41,6 @@ public class RobotHitReceiver : MonoBehaviour
     };
 
     private Dictionary<string, int> _hitboxToAreaMap;
-
     [Header("Impact Meter (optional)")]
     [Tooltip("Referencia a un ImpactMeter que medirá la velocidad del guante después de que se detecte un hit. Si está asignado, el RobotHitReceiver pedirá una muestra y colocará el parámetro 'HitVelocity' en el Animator.")]
     [SerializeField] private ImpactMeter impactMeter;
